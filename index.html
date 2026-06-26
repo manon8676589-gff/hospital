@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Plus – Smart Hospital Management</title>
+  <meta name="description" content="MediCare Plus is a world-class hospital providing exceptional healthcare services across multiple specializations. Book appointments, consult expert doctors, and manage your health journey online." />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loader-content">
+      <div class="pulse-ring"></div>
+      <div class="loader-icon"><i class="fas fa-heartbeat"></i></div>
+      <p>MediCare Plus</p>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Emergency Button (fixed) -->
+  <a href="tel:911" id="emergency-btn" class="emergency-btn" aria-label="Emergency Call 911">
+    <i class="fas fa-phone-alt"></i>
+    <span>Emergency</span>
+  </a>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header id="navbar" class="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="logo">
+        <div class="logo-icon"><i class="fas fa-hospital-user"></i></div>
+        <div class="logo-text">MediCare<span>Plus</span></div>
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#departments" class="nav-link">Departments</a>
+        <a href="#doctors" class="nav-link">Doctors</a>
+        <a href="#appointment" class="nav-link">Appointment</a>
+        <a href="#emergency" class="nav-link">Emergency</a>
+        <a href="#dashboard" class="nav-link">Dashboard</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="btn btn-primary" onclick="document.getElementById('appointment').scrollIntoView({behavior:'smooth'})">
+          <i class="fas fa-calendar-plus"></i> Book Now
+        </button>
+        <button id="hamburger" class="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="home" class="hero">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="floating-icons">
+      <i class="fas fa-stethoscope" style="top:15%;left:8%;animation-delay:0s"></i>
+      <i class="fas fa-heartbeat" style="top:70%;left:5%;animation-delay:1.5s"></i>
+      <i class="fas fa-pills" style="top:30%;right:6%;animation-delay:0.8s"></i>
+      <i class="fas fa-dna" style="top:75%;right:10%;animation-delay:2.2s"></i>
+      <i class="fas fa-microscope" style="top:55%;left:15%;animation-delay:3s"></i>
+      <i class="fas fa-ambulance" style="top:20%;right:18%;animation-delay:1s"></i>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-content" data-animate>
+        <div class="hero-badge"><i class="fas fa-award"></i> #1 Ranked Hospital 2026</div>
+        <h1>Your Health Is Our<br><span class="gradient-text">Greatest Priority</span></h1>
+        <p>World-class medical care with compassionate professionals. Experience the future of healthcare — personalized, precise, and always available.</p>
+        <div class="hero-actions">
+          <a href="#appointment" class="btn btn-primary btn-lg" onclick="scrollTo('#appointment')">
+            <i class="fas fa-calendar-check"></i> Book Appointment
+          </a>
+          <a href="#about" class="btn btn-outline btn-lg">
+            <i class="fas fa-play-circle"></i> Learn More
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong>25+</strong><span>Years Experience</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <strong>500+</strong><span>Expert Doctors</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <strong>50K+</strong><span>Happy Patients</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image" data-animate>
+        <div class="hero-card glass-card">
+          <div class="hero-card-header">
+            <div class="avatar-stack">
+              <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=doc1&backgroundColor=b6e3f4" alt="doctor" class="avatar" />
+              <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=doc2&backgroundColor=d1d4f9" alt="doctor" class="avatar" />
+              <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=doc3&backgroundColor=ffd5dc" alt="doctor" class="avatar" />
+            </div>
+            <div>
+              <strong>Expert Team</strong>
+              <p>500+ Specialists</p>
+            </div>
+          </div>
+          <div class="health-indicator">
+            <span class="indicator-label"><i class="fas fa-heart"></i> Heart Rate</span>
+            <div class="ecg-line">
+              <svg viewBox="0 0 200 40" preserveAspectRatio="none">
+                <polyline points="0,20 30,20 40,5 50,35 60,20 90,20 100,2 110,38 120,20 200,20" fill="none" stroke="#0ea5e9" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="bpm">72 bpm</span>
+          </div>
+          <div class="next-appointment">
+            <i class="fas fa-calendar-check"></i>
+            <div>
+              <small>Next Available</small>
+              <strong>Today, 3:00 PM</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STATS ==================== -->
+  <section class="stats-strip">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item" data-animate>
+          <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" data-target="523">0</span>
+            <span class="stat-label">Expert Doctors</span>
+          </div>
+        </div>
+        <div class="stat-item" data-animate>
+          <div class="stat-icon"><i class="fas fa-bed"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" data-target="1200">0</span>
+            <span class="stat-label">Hospital Beds</span>
+          </div>
+        </div>
+        <div class="stat-item" data-animate>
+          <div class="stat-icon"><i class="fas fa-procedures"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" data-target="48000">0</span>
+            <span class="stat-label">Surgeries Done</span>
+          </div>
+        </div>
+        <div class="stat-item" data-animate>
+          <div class="stat-icon"><i class="fas fa-smile"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" data-target="99">0</span>
+            <span class="stat-label">% Satisfaction</span>
+          </div>
+        </div>
+        <div class="stat-item" data-animate>
+          <div class="stat-icon"><i class="fas fa-award"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" data-target="120">0</span>
+            <span class="stat-label">Awards Won</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual" data-animate>
+          <div class="about-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=600&auto=format" alt="Hospital Building" class="about-img" />
+            <div class="about-badge glass-card">
+              <i class="fas fa-certificate"></i>
+              <div>
+                <strong>JCI Accredited</strong>
+                <small>International Standard</small>
+              </div>
+            </div>
+          </div>
+          <div class="about-img-secondary">
+            <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&auto=format" alt="Medical Team" class="about-img-sm" />
+          </div>
+        </div>
+        <div class="about-content" data-animate>
+          <div class="section-tag"><i class="fas fa-hospital"></i> About Us</div>
+          <h2 class="section-title">Delivering Excellence in <span class="gradient-text">Healthcare</span> Since 2001</h2>
+          <p class="section-desc">MediCare Plus is a multi-specialty hospital dedicated to providing exceptional medical care. With 25+ years of service, we have pioneered innovative treatments and compassionate patient care.</p>
+          <div class="about-features">
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+              <div><strong>Advanced Technology</strong><p>State-of-the-art medical equipment and diagnostic tools</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+              <div><strong>24/7 Emergency Care</strong><p>Round-the-clock emergency services with rapid response</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+              <div><strong>Expert Specialists</strong><p>Board-certified doctors across 20+ medical specialties</p></div>
+            </div>
+          </div>
+          <a href="#appointment" class="btn btn-primary" onclick="document.getElementById('appointment').scrollIntoView({behavior:'smooth'})">
+            <i class="fas fa-calendar-plus"></i> Schedule Visit
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DEPARTMENTS ==================== -->
+  <section id="departments" class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <div class="section-tag"><i class="fas fa-building"></i> Departments</div>
+        <h2 class="section-title">Our Medical <span class="gradient-text">Departments</span></h2>
+        <p class="section-subtitle">Specialized care across every medical discipline, powered by cutting-edge technology</p>
+      </div>
+      <div class="departments-grid" data-animate>
+        <div class="dept-card" data-dept="Cardiology">
+          <div class="dept-icon" style="background:linear-gradient(135deg,#ff6b6b,#ee5a24)"><i class="fas fa-heartbeat"></i></div>
+          <h3>Cardiology</h3>
+          <p>Heart & vascular system care with advanced diagnostics and interventional procedures</p>
+          <span class="dept-doctors">48 Doctors</span>
+        </div>
+        <div class="dept-card" data-dept="Neurology">
+          <div class="dept-icon" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7)"><i class="fas fa-brain"></i></div>
+          <h3>Neurology</h3>
+          <p>Comprehensive treatment for brain, spine, and nervous system disorders</p>
+          <span class="dept-doctors">35 Doctors</span>
+        </div>
+        <div class="dept-card" data-dept="Orthopedics">
+          <div class="dept-icon" style="background:linear-gradient(135deg,#00b894,#00cec9)"><i class="fas fa-bone"></i></div>
+          <h3>Orthopedics</h3>
+          <p>Joint replacement, sports medicine, and musculoskeletal rehabilitation</p>
+          <span class="dept-doctors">42 Doctors</span>
+        </div>
+        <div class="dept-card" data-dept="Pediatrics">
+          <div class="dept-icon" style="background:linear-gradient(135deg,#fdcb6e,#e17055)"><i class="fas fa-baby"></i></div>
+          <h3>Pediatrics</h3>
+          <p>Specialized medical care for infants, children, and adolescents</p>
+          <span class="dept-doctors">39 Doctors</span>
+        </div>
+        <div class="dept-card" data-dept="Oncology">
+          <div class="dept-icon" style="background:linear-gradient(135deg,#fd79a8,#e84393)"><i class="fas fa-ribbon"></i></div>
+          <h3>Oncology</h3>
+          <p>Cancer treatment with chemotherapy, radiation, and immunotherapy</p>
+          <span class="dept-doctors">28 Doctors</span>
+        </div>
+        <div class="dept-card" data-dept="Dermatology">
+          <div class="dept-icon" style="background:linear-gradient(135deg,#55efc4,#00b894)"><i class="fas fa-spa"></i></div>
+          <h3>Dermatology</h3>
+          <p>Skin, hair, and nail disorders including cosmetic dermatology</p>
+          <span class="dept-doctors">22 Doctors</span>
+        </div>
+        <div class="dept-card" data-dept="Gynecology">
+          <div class="dept-icon" style="background:linear-gradient(135deg,#fab1d3,#e84393)"><i class="fas fa-female"></i></div>
+          <h3>Gynecology</h3>
+          <p>Women's reproductive health, prenatal care, and obstetrics</p>
+          <span class="dept-doctors">31 Doctors</span>
+        </div>
+        <div class="dept-card" data-dept="Radiology">
+          <div class="dept-icon" style="background:linear-gradient(135deg,#74b9ff,#0984e3)"><i class="fas fa-x-ray"></i></div>
+          <h3>Radiology</h3>
+          <p>Advanced imaging: MRI, CT scan, PET, and ultrasound diagnostics</p>
+          <span class="dept-doctors">18 Doctors</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DOCTORS ==================== -->
+  <section id="doctors" class="section">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <div class="section-tag"><i class="fas fa-user-md"></i> Our Team</div>
+        <h2 class="section-title">Meet Our <span class="gradient-text">Expert Doctors</span></h2>
+        <p class="section-subtitle">Board-certified specialists committed to your health and wellbeing</p>
+      </div>
+      <!-- Search & Filter -->
+      <div class="doctors-toolbar" data-animate>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="doctor-search" placeholder="Search by name or specialization..." />
+        </div>
+        <div class="filter-tabs" id="dept-filter">
+          <button class="filter-tab active" data-filter="all">All</button>
+          <button class="filter-tab" data-filter="Cardiology">Cardiology</button>
+          <button class="filter-tab" data-filter="Neurology">Neurology</button>
+          <button class="filter-tab" data-filter="Orthopedics">Orthopedics</button>
+          <button class="filter-tab" data-filter="Pediatrics">Pediatrics</button>
+          <button class="filter-tab" data-filter="Oncology">Oncology</button>
+          <button class="filter-tab" data-filter="Gynecology">Gynecology</button>
+        </div>
+      </div>
+      <div class="doctors-grid" id="doctors-grid" data-animate>
+        <!-- Dynamically rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctor Modal -->
+  <div id="doctor-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Doctor Profile">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ==================== APPOINTMENT ==================== -->
+  <section id="appointment" class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <div class="section-tag"><i class="fas fa-calendar-plus"></i> Appointments</div>
+        <h2 class="section-title">Book an <span class="gradient-text">Appointment</span></h2>
+        <p class="section-subtitle">Schedule your visit in minutes — we'll confirm within 24 hours</p>
+      </div>
+      <div class="appointment-wrapper" data-animate>
+        <div class="appointment-info">
+          <h3>Why Choose MediCare Plus?</h3>
+          <ul class="appointment-perks">
+            <li><i class="fas fa-clock"></i> <div><strong>Flexible Scheduling</strong><p>Morning, afternoon and evening slots available</p></div></li>
+            <li><i class="fas fa-video"></i> <div><strong>Telemedicine Option</strong><p>Virtual consultations from your home</p></div></li>
+            <li><i class="fas fa-shield-alt"></i> <div><strong>Insurance Accepted</strong><p>Major insurance plans accepted</p></div></li>
+            <li><i class="fas fa-bell"></i> <div><strong>Reminder Service</strong><p>Automated reminders via SMS and email</p></div></li>
+          </ul>
+          <div class="contact-quick">
+            <a href="tel:+18001234567" class="btn btn-outline"><i class="fas fa-phone"></i> +1 800 123 4567</a>
+          </div>
+        </div>
+        <form id="appointment-form" class="appointment-form glass-card" novalidate>
+          <h3>Patient Information</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="app-name"><i class="fas fa-user"></i> Full Name *</label>
+              <input type="text" id="app-name" placeholder="John Doe" required />
+              <span class="field-error" id="err-name"></span>
+            </div>
+            <div class="form-group">
+              <label for="app-email"><i class="fas fa-envelope"></i> Email *</label>
+              <input type="email" id="app-email" placeholder="john@example.com" required />
+              <span class="field-error" id="err-email"></span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="app-phone"><i class="fas fa-phone"></i> Phone *</label>
+              <input type="tel" id="app-phone" placeholder="+1 (555) 000-0000" required />
+              <span class="field-error" id="err-phone"></span>
+            </div>
+            <div class="form-group">
+              <label for="app-dept"><i class="fas fa-building"></i> Department *</label>
+              <select id="app-dept" required>
+                <option value="">Select Department</option>
+                <option>Cardiology</option>
+                <option>Neurology</option>
+                <option>Orthopedics</option>
+                <option>Pediatrics</option>
+                <option>Oncology</option>
+                <option>Dermatology</option>
+                <option>Gynecology</option>
+                <option>Radiology</option>
+              </select>
+              <span class="field-error" id="err-dept"></span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="app-date"><i class="fas fa-calendar"></i> Date *</label>
+              <input type="date" id="app-date" required />
+              <span class="field-error" id="err-date"></span>
+            </div>
+            <div class="form-group">
+              <label for="app-time"><i class="fas fa-clock"></i> Time *</label>
+              <select id="app-time" required>
+                <option value="">Select Time</option>
+                <option>09:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+                <option>02:00 PM</option>
+                <option>03:00 PM</option>
+                <option>04:00 PM</option>
+                <option>05:00 PM</option>
+              </select>
+              <span class="field-error" id="err-time"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="app-type"><i class="fas fa-notes-medical"></i> Appointment Type</label>
+            <select id="app-type">
+              <option>General Consultation</option>
+              <option>Follow-up Visit</option>
+              <option>Emergency Consultation</option>
+              <option>Lab Test / Diagnostics</option>
+              <option>Telemedicine</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="app-notes"><i class="fas fa-comment-medical"></i> Symptoms / Notes</label>
+            <textarea id="app-notes" rows="3" placeholder="Briefly describe your symptoms or reason for visit..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-full">
+            <i class="fas fa-calendar-check"></i> Confirm Appointment
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EMERGENCY ==================== -->
+  <section id="emergency" class="section emergency-section">
+    <div class="container">
+      <div class="emergency-content" data-animate>
+        <div class="emergency-text">
+          <div class="emergency-badge"><i class="fas fa-exclamation-triangle"></i> 24/7 Emergency</div>
+          <h2>In a Medical Emergency?<br><span class="gradient-text">We're Always Here.</span></h2>
+          <p>Our emergency department operates around the clock with trauma specialists, ICU, and rapid response teams ready to help you immediately.</p>
+          <div class="emergency-contacts">
+            <a href="tel:911" class="emergency-contact-btn">
+              <i class="fas fa-ambulance"></i>
+              <div><strong>Call 911</strong><small>Life-threatening emergency</small></div>
+            </a>
+            <a href="tel:+18001234567" class="emergency-contact-btn secondary">
+              <i class="fas fa-phone-alt"></i>
+              <div><strong>+1 800 123 4567</strong><small>Hospital direct line</small></div>
+            </a>
+          </div>
+        </div>
+        <div class="emergency-services">
+          <div class="emergency-service-card glass-card">
+            <i class="fas fa-truck-medical"></i>
+            <h4>Ambulance Service</h4>
+            <p>Average 8-min response time within city limits</p>
+          </div>
+          <div class="emergency-service-card glass-card">
+            <i class="fas fa-hospital"></i>
+            <h4>Trauma Center</h4>
+            <p>Level-1 trauma center equipped for all emergencies</p>
+          </div>
+          <div class="emergency-service-card glass-card">
+            <i class="fas fa-brain"></i>
+            <h4>Stroke Unit</h4>
+            <p>Dedicated stroke team with CT and MRI on standby</p>
+          </div>
+          <div class="emergency-service-card glass-card">
+            <i class="fas fa-baby"></i>
+            <h4>Neonatal ICU</h4>
+            <p>Specialized care for premature and critically ill newborns</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PATIENT DASHBOARD ==================== -->
+  <section id="dashboard" class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <div class="section-tag"><i class="fas fa-tachometer-alt"></i> Patient Dashboard</div>
+        <h2 class="section-title">Your <span class="gradient-text">Health Dashboard</span></h2>
+        <p class="section-subtitle">View and manage your appointment history</p>
+      </div>
+      <div class="dashboard-wrapper" data-animate>
+        <div class="dashboard-summary" id="dashboard-summary">
+          <div class="summary-card">
+            <i class="fas fa-calendar-check"></i>
+            <div>
+              <span id="total-appointments">0</span>
+              <p>Total Appointments</p>
+            </div>
+          </div>
+          <div class="summary-card">
+            <i class="fas fa-clock"></i>
+            <div>
+              <span id="upcoming-count">0</span>
+              <p>Upcoming</p>
+            </div>
+          </div>
+          <div class="summary-card">
+            <i class="fas fa-check-double"></i>
+            <div>
+              <span id="completed-count">0</span>
+              <p>Completed</p>
+            </div>
+          </div>
+        </div>
+        <div class="appointments-table-wrapper glass-card">
+          <div class="table-header">
+            <h3><i class="fas fa-list"></i> Appointment History</h3>
+            <button id="clear-appointments" class="btn btn-danger btn-sm">
+              <i class="fas fa-trash"></i> Clear All
+            </button>
+          </div>
+          <div id="appointments-list" class="appointments-list">
+            <div class="empty-state">
+              <i class="fas fa-calendar-plus"></i>
+              <h4>No Appointments Yet</h4>
+              <p>Book your first appointment to see it here</p>
+              <a href="#appointment" class="btn btn-primary btn-sm" onclick="document.getElementById('appointment').scrollIntoView({behavior:'smooth'})">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section id="testimonials" class="section">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <div class="section-tag"><i class="fas fa-star"></i> Testimonials</div>
+        <h2 class="section-title">What Our <span class="gradient-text">Patients Say</span></h2>
+      </div>
+      <div class="testimonials-slider" data-animate>
+        <div class="testimonials-track" id="testimonials-track">
+          <div class="testimonial-card glass-card">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p>"MediCare Plus saved my life after my heart attack. The cardiology team was phenomenal – fast, professional, and incredibly caring. I couldn't be more grateful."</p>
+            <div class="testimonial-author">
+              <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=patient1" alt="Patient" />
+              <div>
+                <strong>Michael Harrison</strong>
+                <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                <small>Cardiology Patient</small>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card glass-card">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p>"The pediatric department is wonderful. Dr. Patel took amazing care of my daughter and explained everything clearly. The staff made my child feel comfortable and safe."</p>
+            <div class="testimonial-author">
+              <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=patient2" alt="Patient" />
+              <div>
+                <strong>Sarah Thompson</strong>
+                <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                <small>Pediatrics Parent</small>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card glass-card">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p>"I had a complex knee replacement surgery here and the recovery was incredible. The orthopedic team is world-class. I'm back to running marathons!"</p>
+            <div class="testimonial-author">
+              <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=patient3" alt="Patient" />
+              <div>
+                <strong>David Chen</strong>
+                <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                <small>Orthopedics Patient</small>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card glass-card">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p>"The online appointment booking is so convenient. The reminders, the friendly staff, and the short waiting times make every visit a pleasant experience."</p>
+            <div class="testimonial-author">
+              <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=patient4" alt="Patient" />
+              <div>
+                <strong>Emma Williams</strong>
+                <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                <small>General Patient</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-btn" id="prev-testimonial" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+          <div class="slider-dots" id="slider-dots"></div>
+          <button class="slider-btn" id="next-testimonial" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section id="faq" class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <div class="section-tag"><i class="fas fa-question-circle"></i> FAQ</div>
+        <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+      </div>
+      <div class="faq-wrapper" data-animate>
+        <div class="faq-accordion" id="faq-accordion">
+          <div class="faq-item">
+            <button class="faq-question">How do I book an appointment online?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Visit our Book Appointment section, fill in your personal details, select a department, choose a date and time that works for you, and submit the form. You'll receive a confirmation and reminder notifications.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">What insurance plans do you accept?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>We accept all major insurance providers including BlueCross BlueShield, Aetna, Cigna, UnitedHealthcare, Humana, and Medicare/Medicaid. Please contact our billing department for specific plan verification.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Are telemedicine consultations available?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Yes! We offer video consultations for many specialties. You can book a telemedicine appointment through the same booking form — simply select "Telemedicine" as the appointment type.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">How do I get my lab results?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Lab results are typically available within 24-72 hours. You'll receive a notification by email when your results are ready. You can also access them through our patient portal or by calling our lab department.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">What should I bring to my first appointment?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Please bring: a valid government-issued photo ID, your insurance card, a list of current medications, any relevant medical records or previous test results, and referral letters if required by your insurance plan.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Is parking available at the hospital?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Yes, we have a multi-story parking facility with 800+ spaces. The first 2 hours are free for outpatients. We also offer valet parking at the main entrance. The hospital is also well-connected by public transport.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <div class="section-tag"><i class="fas fa-envelope"></i> Contact</div>
+        <h2 class="section-title">Get in <span class="gradient-text">Touch</span></h2>
+        <p class="section-subtitle">We're here to answer your questions and support your health journey</p>
+      </div>
+      <div class="contact-grid" data-animate>
+        <div class="contact-info">
+          <div class="contact-card glass-card">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <h4>Address</h4>
+            <p>123 Healthcare Boulevard<br>Medical District, New York<br>NY 10001, USA</p>
+          </div>
+          <div class="contact-card glass-card">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <h4>Phone</h4>
+            <p>Main: +1 800 123 4567<br>Emergency: 911<br>Appointments: +1 800 987 6543</p>
+          </div>
+          <div class="contact-card glass-card">
+            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+            <h4>Working Hours</h4>
+            <p>Mon – Fri: 7:00 AM – 8:00 PM<br>Saturday: 8:00 AM – 4:00 PM<br>Emergency: 24/7</p>
+          </div>
+          <div class="contact-card glass-card">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <h4>Email</h4>
+            <p>info@medicareplus.com<br>appointments@medicareplus.com<br>billing@medicareplus.com</p>
+          </div>
+        </div>
+        <form id="contact-form" class="contact-form glass-card" novalidate>
+          <h3>Send Us a Message</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c-name">Full Name *</label>
+              <input type="text" id="c-name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="c-email">Email *</label>
+              <input type="email" id="c-email" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="c-subject">Subject *</label>
+            <input type="text" id="c-subject" placeholder="What is this regarding?" required />
+          </div>
+          <div class="form-group">
+            <label for="c-message">Message *</label>
+            <textarea id="c-message" rows="5" placeholder="How can we help you?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon"><i class="fas fa-hospital-user"></i></div>
+            <div class="logo-text">MediCare<span>Plus</span></div>
+          </div>
+          <p>Delivering excellence in healthcare since 2001. Your health is our mission.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#departments">Departments</a></li>
+            <li><a href="#doctors">Our Doctors</a></li>
+            <li><a href="#appointment">Appointments</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#emergency">Emergency Care</a></li>
+            <li><a href="#dashboard">Patient Portal</a></li>
+            <li><a href="#">Laboratory</a></li>
+            <li><a href="#">Pharmacy</a></li>
+            <li><a href="#">Health Packages</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Contact</h4>
+          <ul>
+            <li><i class="fas fa-phone"></i> +1 800 123 4567</li>
+            <li><i class="fas fa-envelope"></i> info@medicareplus.com</li>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Healthcare Blvd, NY</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 MediCare Plus. All rights reserved. | Designed with <i class="fas fa-heart" style="color:#e84393"></i> for better healthcare</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
